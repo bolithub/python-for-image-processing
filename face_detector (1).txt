@@ -1,0 +1,57 @@
+
+from __future__ import print_function
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# load the image and convert it to grayscale
+imgpath = "C:\\users\\Adekunle Adewale\\Desktop\\Projects\\yify.jpg"
+faceCascadePath = "C:\\users\\Adekunle Adewale\\Desktop\\Projects\\haarcascade_frontalface_default.xml"
+
+image = cv2.imread(imgpath, 1)
+img2 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  
+
+# load the face detector
+faceCascade = cv2.CascadeClassifier(faceCascadePath)
+
+
+# detect faces in the image
+rects = faceCascade.detectMultiScale(img2,
+			scaleFactor = 1.1, minNeighbors = 5,
+			minSize = (30, 30))
+
+
+		# return the rectangles representing bounding
+		# boxes around the faces
+    
+
+if (len(rects)) == 0:
+     print("I found no face")
+elif (len(rects)) == 1:
+     print("I found {} face".format(len(rects)))
+else:
+    print("I found {} faces .".format(len(rects)))
+
+# loop over the faces and draw a rectangle around each
+for (x, y, w, h) in rects:
+	cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    
+    
+    
+
+
+
+# show the detected faces
+cv2.imshow("Faces detected", image)
+cv2.waitKey(0)
+
+
+
+
+
+
+
+
+
+
